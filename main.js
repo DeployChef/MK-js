@@ -66,21 +66,28 @@ function changeHp(player) {
     if (player.hp < 0)
         player.hp = 0;
     $playerLife.style.width = player.hp + "%";
-
-    if (player.hp == 0) {
-        $arenas.appendChild(playerLose(player.name));
-    }
 }
 
-function playerLose(name) {
+function playerWin(name) {
     const $loseTitle = createElement('div', 'loseTitle');
-    $loseTitle.innerText = name + ' lose';
+    $loseTitle.innerText = name + ' win!';
+
+    $randomButton.disabled = true;
     return $loseTitle;
 }
 
 $randomButton.addEventListener('click', function() {
     changeHp(player1);
+    if (player1.hp == 0) {
+        $arenas.appendChild(playerWin(player2.name));
+        return;
+    }
+
     changeHp(player2);
+    if (player2.hp == 0) {
+        $arenas.appendChild(playerWin(player1.name));
+        return;
+    }
 })
 
 $arenas.appendChild(createPlayer(player1));
