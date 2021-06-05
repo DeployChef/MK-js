@@ -61,12 +61,13 @@ function createPlayer(playerObj) {
 
 function changeHp(player) {
     const $playerLife = document.querySelector('.player' + player.player + ' .life');
-    player.hp -= 20;
+    const hit = Math.floor(Math.random() * 20)
+    player.hp -= hit;
     if (player.hp < 0)
         player.hp = 0;
     $playerLife.style.width = player.hp + "%";
 
-    if (player.hp < 0) {
+    if (player.hp == 0) {
         $arenas.appendChild(playerLose(player.name));
     }
 }
